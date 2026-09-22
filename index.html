@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course registration | ICT461 portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <p class="brand">ICT461 Course Portal</p>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="#register" aria-current="page">Register</a></li>
+          <li><a href="#help">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page">
+      <div class="intro">
+        <h1>Course registration</h1>
+        <p class="lead">Enter your details to register for a course this semester.</p>
+      </div>
+
+      <div class="page-grid">
+        <section class="card" id="register" aria-labelledby="register-heading">
+          <h2 id="register-heading">Register for a course</h2>
+          <p class="hint" id="form-hint">All fields are required.</p>
+
+          <form id="registration-form" novalidate aria-describedby="form-hint">
+            <div class="field-grid">
+              <div class="field">
+                <label for="full-name">Full name</label>
+                <input id="full-name" name="name" type="text" autocomplete="name"
+                       required minlength="2" aria-describedby="full-name-error">
+                <p class="field-error" id="full-name-error" hidden></p>
+              </div>
+
+              <div class="field">
+                <label for="student-id">Student ID</label>
+                <input id="student-id" name="studentId" type="text" autocomplete="off"
+                       required pattern="[A-Za-z0-9\-]{5,15}"
+                       aria-describedby="student-id-hint student-id-error">
+                <p class="hint" id="student-id-hint">Letters, numbers and hyphens, 5 to 15 characters.</p>
+                <p class="field-error" id="student-id-error" hidden></p>
+              </div>
+
+              <div class="field">
+                <label for="programme">Programme</label>
+                <!-- autocomplete="off" stops Firefox restoring the value itself on reload,
+                     so a remembered programme really comes from localStorage. -->
+                <select id="programme" name="programme" required autocomplete="off"
+                        aria-describedby="programme-hint programme-error">
+                  <option value="">Choose a programme</option>
+                  <option value="bsc-computer-science">BSc Computer Science</option>
+                  <option value="bsc-information-technology">BSc Information Technology</option>
+                  <option value="bsc-software-engineering">BSc Software Engineering</option>
+                  <option value="diploma-ict">Diploma in ICT</option>
+                </select>
+                <p class="hint" id="programme-hint">Your programme is remembered on this device.</p>
+                <p class="field-error" id="programme-error" hidden></p>
+              </div>
+
+              <div class="field">
+                <label for="course">Course</label>
+                <select id="course" name="course" required aria-describedby="course-error">
+                  <option value="">Choose a course</option>
+                  <option value="ICT461">ICT461 Web standards and HTTP fundamentals</option>
+                  <option value="ICT452">ICT452 Database systems</option>
+                  <option value="ICT463">ICT463 Systems analysis and design</option>
+                </select>
+                <p class="field-error" id="course-error" hidden></p>
+              </div>
+            </div>
+
+            <button type="submit" id="submit-button" class="button">Submit registration</button>
+
+            <!-- Live regions: polite for progress and success, assertive for errors. -->
+            <div id="status" class="feedback" role="status"></div>
+            <div id="error" class="feedback feedback--error" role="alert"></div>
+          </form>
+        </section>
+
+        <aside class="card card--quiet" id="help" aria-labelledby="help-heading">
+          <h2 id="help-heading">Using the keyboard</h2>
+          <ul class="tips">
+            <li><kbd>Tab</kbd> moves to the next field and <kbd>Shift</kbd> + <kbd>Tab</kbd> goes back.</li>
+            <li>On a list, use the up and down arrow keys to change the choice.</li>
+            <li>Press <kbd>Enter</kbd> on the submit button to send the form.</li>
+            <li>Fields with a problem are named in a message beside them.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ICT461 Web standards and HTTP fundamentals. Practice portal for coursework.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
