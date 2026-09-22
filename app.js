@@ -1,4 +1,4 @@
-import { registerStudent, ApiError } from "./api.js";
+import { registerStudent, ApiError, API_BASE_URL } from "./api.js";
 
 const PROGRAMME_KEY = "ict461.programmePreference";
 const SUBMIT_LABEL = "Submit registration";
@@ -173,3 +173,37 @@ form.addEventListener("submit", async (event) => {
 });
 
 restoreProgrammePreference();
+
+/* ---------- Task 4: cookie demonstration ---------- */
+// Separate from the registration Fetch helper: this one needs credentials: "include"
+// so the browser sends/stores the cookie, and the server allows one exact origin
+// (not "*") plus Access-Control-Allow-Credentials: true to permit that.
+const cookieSetButton = document.querySelector("#cookie-set-button");
+const cookieCheckButton = document.querySelector("#cookie-check-button");
+const cookieResult = document.querySelector("#cookie-result");
+
+cookieSetButton?.addEventListener("click", async () => {
+  try {
+    const response = await fetch(new URL("/api/demo-cookie", API_BASE_URL), {
+      credentials: "include",
+    });
+    const data = await response.json();
+    cookieResult.textContent = data.message ?? "Cookie set.";
+  } catch {
+    cookieResult.textContent = "Could not reach the server.";
+  }
+});
+
+cookieCheckButton?.addEventListener("click", async () => {
+  try {
+    const response = await fetch(new URL("/api/demo-cookie/check", API_BASE_URL), {
+      credentials: "include",
+    });
+    const data = await response.json();
+    cookieResult.textContent = data.receivedCookie
+      ? `Server read the cookie back: ${data.receivedCookie}`
+      : "No cookie was sent — click \"Set demo cookie\" first.";
+  } catch {
+    cookieResult.textContent = "Could not reach the server.";
+  }
+});
