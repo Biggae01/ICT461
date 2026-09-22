@@ -1,0 +1,14 @@
+{
+  "name": "ict461-course-registration-portal",
+  "version": "1.0.0",
+  "description": "ICT461 lab: course registration portal (interface + Express API)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2"
+  }
+}
